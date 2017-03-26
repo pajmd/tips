@@ -1,0 +1,52 @@
+https://docs.python.org/2/tutorial/modules.html#importing-from-a-package 6.1.2
+When a module named spam is imported, the interpreter first searches for a built-in module with that name. If not found, it then searches for a file named spam.py in a list of directories given by the variable sys.path. sys.path is initialized from these locations:
+
+    - the directory containing the input script (or the current directory).
+    - PYTHONPATH (a list of directory names, with the same syntax as the shell variable PATH).
+    - the installation-dependent default.
+
+
+https://docs.python.org/2/tutorial/modules.html#importing-from-a-package 6.4
+sound/                          Top-level package
+      __init__.py               Initialize the sound package
+      formats/                  Subpackage for file format conversions
+              __init__.py
+              wavread.py
+              wavwrite.py
+              aiffread.py
+              aiffwrite.py
+              auread.py
+              auwrite.py
+              ...
+      effects/                  Subpackage for sound effects
+              __init__.py
+              echo.py
+              surround.py   from . import echo or from .. import formats or from ..filters import equalizer
+              reverse.py
+              ...
+      filters/                  Subpackage for filters
+              __init__.py
+              equalizer.py
+              vocoder.py   from sound.effects import echo
+              karaoke.py
+
+
+https://docs.python.org/2/whatsnew/2.5.html#pep-328-absolute-and-relative-imports
+code in the A.B.C module can do:
+from . import D                 # Imports A.B.D
+from .. import E                # Imports A.E
+from ..F import G               # Imports A.F.G
+
+My interpretation:
+A/
+  __init__.py
+  E.py
+  B/
+    __init__.py
+    C.py
+    D.py
+  F/
+    __init__.py
+    G.py
+
+

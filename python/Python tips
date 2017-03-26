@@ -1,0 +1,1690 @@
+Python tips:
+
+- python -i scrit.py will run the script and run in interactive mode
+
+debugging:
++++++++++
+- Load the program with  python -i. If it was raising an exception, it will stop and it will be possinble to poke around like printin some variables.
+
+- At this point it is also possbile to start the debugger by importing pdb
+python -i scrit.py
+>>>import pdb
+>>>pdb.pm()  - post mortem to list, print ...
+it will show were the script stopped
+(Pdb) print var
+(Pdb) list
+(Pdb) s # single step
+(pdb) quit
+>>>
+
+- Another option is to start de debugger in the script by importing within the code pdb and calling set_trace() where we went to stop
+import pdb; pdb.set_trace() #launches the debugger
+
+python scrit.py # no need for -i
+(Pdb)
+
+
+PEP standard
+- 4 indentation spaces
+- 2 blank lines between import, class and function definition
+- 1 blank lines between method
+- 1 import statment per line
+- class names are camel case
+- method name use _
+
+To pass arguments to a script:
+++++++++++++++++++++++++++++++
+Use sys module:
+
+import sys
+
+if len(sys.argv < 3:
+	raise SystemExit('usage test..py param1 param2')
+print(sys.argv) # [0] scriptname [1] param1 [2] param2
+....
+raise SystemExit(0) # to finish prematurely a program
+
+make a script executable:
++++++++++++++++++++++++++
+add at the top of the script
+#!/usr/bin/env python #(or python3)
+chmod 755 script.py
+
+print 2 (9):
+------------
+- print(var1, var 2, var3 ...)
+  print('%10s %10d ' % (v1, v2))
+or print('{:>10s} {:>10d} {:>10.2f}'.format(v1,v2,v3))  
+
+- to print into a file: in python3 - no even need to import io
++++++++++++++++++++++++
+out = open('file.txt', 'w')
+print('{:>10s} {:>10d} {:>10.2f}'.format(v1,v2,v3), file=out)
+out.close()
+
+fileio: python3
++++++++++
+f = open('file.txt', 'r')
+data = f.read() puts entire file in a string data
+
+line  by line:
+for line in f:
+	print(line)
+f.close()
+
+with open('file.txt', 'r') as f
+	first_line = next(f) # picks the first line
+	for line in f: #gets the following lines
+		print(line)
+
+
+# with will close f automatically
+with open('file.txt', 'r') as f
+	data = f.read()
+
+- text
+a = 'here is some text' or
+a = "here is some text"
+a can be considered as an array (array may have differnt type elemets)
+a[0] would print h
+a[-1]            t
+slice:
+a[0:4]           text (or a[:4])
+len(a)           17
+a.strip() removes spaces and control chars
+a.strip('i') "here s some text"
+strings are immutable
+
+a.replace('so','awso')
+a.split(' ') returns an array
+
+transform string in int
+v = int('12')
+
+
+
+Functions and doc strings 4 (14):
+---------------------------------
+""" introduces a document string that can be view with 
+>>>help(__main__)
+>>>help(greeting) showing
+greeting(name, last_name)
+   Issue a greeting
+
+def greeting(name, last_name):
+	"""Issues a greeting"""
+or
+def greeting(name, last_name):
+	"""
+	Issues a greeting
+	"""
+	print('Hello, name')
+	return 'Have a good day '+name.
+or
+"""
+module level docstring
+"""
+def greeting(name, last_name):
+	"""
+	Issues a greeting-summary line
+
+	More detailed comment
+	"""
+
+>>> a = greeting('philippe')
+hello philippe
+>>> a
+Have a good day philippe. 
+
+>>> a = greeting(last_name='jmd', name='philippe')
+
+
+Exceptions: 4.3
+-----------
+for i in range[10]
+	try:
+		statements
+	except ValueError:  #ValueError would be the exception being 
+		print('Bad data', i) #thrown
+		continue #skip to the next loop
+	print('something')
+
+# usin as save the exception in a variable
+       --
+for i in range[10]
+	try:
+		statements
+	except ValueError as err:   #ValueError would be the exception being 
+		print('Bad data', i, err) #thrown
+		continue #skip to the next loop
+	print('something')
+
+# use enumerate to create a automatic counter:
+for rownum, i in enumerate(range[10], start=1)
+
+	try:
+		statements
+	except ValueError as err:   #ValueError would be the exception being 
+		print('row:', rownum, 'Bad data', i, err) #thrown
+		continue #skip to the next loop
+	print('something')
+
+
+# bad practice catch everything
+for rownum, i in enumerate(range[10], start=1)
+
+	try:
+		statements
+	except Exception as err:   #ValueError would be the exception being 
+		print('row:', rownum, 'Bad data', i, err) #thrown
+		continue #skip to the next loop
+	print('something')
+
+# option to print error willingly
+def dosomething(par1, errlevel='warn') # otpinal argument
+	for rownum, i in enumerate(range[10], start=1)
+
+		try:
+			statements
+		except ValueError as err:   #ValueError would be the exception being 
+			if errlevel == 'warn':
+				print('row:', rownum, 'Bad data', i, err) #thrown
+			continue #skip to the next loop
+		print('something')
+
+
+dosomething(value, 'silent') #or
+dosomething(value, errlevel='silent') 
+
+#to force people to name the optional agument use * before it
+
+def dosomething(par1,*, errlevel='warn') # optional argument
+	for rownum, i in enumerate(range[10], start=1)
+
+		try:
+			statements
+		except ValueError as err:   #ValueError would be the exception being 
+			if errlevel == 'warn':
+				print('row:', rownum, 'Bad data', i, err) #thrown
+			continue #skip to the next loop
+		print('something')
+
+
+dosomething(errlevel='silent') 
+
+# in order to give and control optional levels
+# of exceptions
+
+def dosomething(par1,*, errlevel='warn') # optional argument
+	if error not in {'warn','raise','silent'}:
+		raise ValueError("Error leve must be in 'warn','raise','silent'" )
+	for rownum, i in enumerate(range[10], start=1)
+
+		try:
+			statements
+		except ValueError as err:   #ValueError would be the exception being 
+			if errlevel == 'warn':
+				print('row:', rownum, 'Bad data', i, err) #thrown
+			elif errlevel == 'raise':
+				raise # reraise the exception
+			else:
+				pass # ignore
+			continue #skip to the next loop
+		print('something')
+
+
+
+
+Data structures 5 (19):
+-----------------------
+Tuple  ()  like a record or row in a db immutable
++++++++++
+t=('aa', '43', 12,77) # packing
+>>>t
+('aa', '43', 12,77)
+>>>len(t)
+4
+>>>t[1]
+'43'
+
+name, string_num, v1, v2 = t  # unpacking
+>>>name
+'aa'
+t[1] = 'bb' # would throw an error bc t is immutable
+
+List []
++++++++
+l = ['ibm','sun','vod']
+>>>len(l)
+3
+>>>l
+['ibm,'sun','vod']
+
+#list are mutable and usually of the same type
+l.append('stuff')
+l.insert(1,222222)
+
+
+Set {}
+++++++
+set_removes_duplicate = {'sun', 'ibm', 'sun', 'msft'}
+>>>set_removes_duplicate
+{'sun', 'ibm',  'msft'}
+#making a set of a list removes duplicate in the list
+stocks =['sun', 'ibm', 'sun', 'msft']
+>>>set(stocks)
+{'sun', 'ibm',  'msft'}
+
+sets are used for membership testing:
+>>> sun in set_removes_duplicate
+True
+
+Dictionary is a mapping
+prices{
+	'ibm' : 100,
+	'msft' : 323,
+	'sun' : 21
+}
+>>>prices['msft']
+323
+
+prices['sun'] = 210
+>>>'ibm' in prices
+True
+
+
+prices{
+	'ibm' : {'high':100, 'low' : 99} ,
+	'msft' : 323,
+	'sun' : 21
+}
+
+prices['ibm']['low']
+
+
+#using data strucures
+file:
+'ibm' , '2017-01-10', 1221
+'sun' , '2017-01-10', 543
+'msft' , '2017-01-10', 54
+'vod' , '2017-01-10', 63
+'FTL' , '2017-01-10', 124
+
+#we could read each line of the file in tuples and put tuples in a list
+share_record = tuple(row)
+shares = [('ibm' , '2017-01-10', 1221), ('sun' , '2017-01-10', 543), ('msft' , '2017-01-10', 54), ('vod' , '2017-01-10', 63), ('FTL' , '2017-01-10', 124), ('msft' , '2017-01-15', 52)]
+
+total = 0
+for share in shares:
+	total += share[2]
+
+# or nicer using unpacking
+for name, date, price in shares:
+	total += price
+
+# now to avoid unpacking all the columns of the tuple
+share could be a dictionary
+share {
+	'name' : row[0],
+	'date' : row[1],
+	'price' : row[2]
+}
+
+# the loop would become
+for share in shares:
+	total += share['price']
+
+
+# exporting dictionaries to json
+import json
+
+data = json.dumps(shares) # shares being a list of dictionaries
+
+# back to a dictionary:
+ dico = json.loads(data)
+
+5.3 Data manipulation (portfolio is now share list of dictionary):
+---------------------
+names[]
+for holding in portfolio:
+	names.append(holding['name'])
+
+# or filetering on price > 100
+more100 = []
+for holding in portfolio:
+	if holding['price'] > 100
+	more100.append(holding)
+
+>>>more100
+[('ibm' , '2017-01-10', 1221), ('sun' , '2017-01-10', 543), ('FTL' , '2017-01-10', 124)]
+
+# auto-constructing a list - list comprehension
+
+total = sum([holding['price'] for holding in portfolio])
+[holding['price'] for holding in portfolio] # create a temporary list of prices
+
+# query type of thing 
+# get all the holdings in porfolio for which the price > 100
+[holding for holding in portfolio if holding['price'] > 100]
+#or
+[holding['name'] for holding in portfolio if holding['price'] > 100]
+
+#to get name of shares without duplicates
+
+no_dup = {holding['name' for holding in portfolio]}
+
+namestr = ','.join(no_dup) # create a str comma separates
+namestr.split(',') # create a list
+
+# zip function to pair data from 2 lists
+names=['ibm','sun','msft']
+prices=[12,564,78]
+for name, price in zip(names, prices):	
+	print(name,' = ', price)
+
+dicprices = dict(zip(names, prices))
+
+# if prices needed formatting I coudl still create a dictioanry
+dictprice = {name: float(price) for name , price in zip(names, prices)}
+
+
+
+sorting grouping: 5.4 (23)
+-----------------
+- sorting
+portfolio being a dictionary
+porfolio,sort(key=function_returning_key_to_sort_with_in_portfolio)
+
+using a lambda function (anonymous) makes it shorter to write:
+porfolio,sort(key=lambda holding:holding['name'])
+
+b = lambda x,y : x + y # takes 2 arguments and adds them up returns sum
+>>>b(2,3)
+5
+
+- grouping
+++++++++++
+
+using itertools module
+	import itertools
+	for name, items in itertools.groupby(portfolio, key = lambda holding: holding['name']):
+		print(name) # prints the name of a share
+		for item in items:
+			print('  ', item) # print all the dict for this share
+
+
+
+Libray Module Packages: 6.1 (25)
+-----------------------
+
+import
+++++++
+by doing an import a module(file.py) gets created in the program
+import does actually run the whole program so it the file
+ends with a function call, the function call will happen
+The import stuff will create the namespace stuff
+The module (import name) need to be used to see the content of the file
+ex: 
+simple.py
+x=42
+
+def func:
+	print x
+
+------
+loading.py
+import simple
+x=55
+simple.x
+
+---
+In the same way the import variant from ... loads and runs the entire module but  only exposes the specified import. No more efficient.
+ex:
+from simple import func
+
+func() # ok
+simple.x # doesn't exists
+
+Two same import would only run onces. To see a module in the dictionary
+
+import sys
+import simple
+
+sys.modules['simple']
+
+The path where python uses to find files is:
+import sys
+sys.path
+
+path can be alter 2 ways:
+sys.path.append['some/dir']
+or 
+env PYTHONPATH=some/dir
+
+If  the library is actually a script that calls at the end some function it is better to protect these calls with an if statement
+that checks the name of the module whether it is the main module 
+
+if __name-- == '__main__':
+	print('stuff')
+	func()
+
+as soon as the file is imported it's name is no longer main but the name of the file.
+
+Difference between import sys and from sys import * is that 
+- in the first form the name sys is brought in the module that does the import. So to access what's defined in sys we have to do sys.exit() or sys.dict()
+- in the second form we could just do exit(). The problem with the second form is that we would hide and exit define in our modulr before the import.
+
+packages:
++++++++++
+https://docs.python.org/2/tutorial/modules.html
+http://python-notes.curiousefficiency.org/en/latest/python_concepts/import_traps.html
+
+a folder becomes a package when a __init__.py exists in the folder.
+There should be (at least in python2.7), one __init__.py by folder and sub folder.
+
+package_loading 
+     |
+     +---- loader.py
+     |   from mainpkg.test import func
+     |   from mainpkg.test import Del
+     |   from mainpkg.subpkg.subtest import subfunc
+     |   from mainpkg.subpkg.subtest import SubDel
+     |   from mainpkg import funcsubtest3
+     |
+     |
+     +----- mainpkg
+     |         |
+     |         |
+     |         +------__init__.py
+     |         |from .subpkg.subtest3 import funcsubtest3
+     |         |
+     |         +------------- subpkg
+     |         |                 |
+     |         |                 +----__init__.py
+     |         |                 |
+     |         |                 +----subtstest.py
+     |         |                 | import mainpkg.subpkg.subtest2
+     |         |                 |
+     |         |                 +----subtstet2.py
+     |         |                 |
+     |         |                 +----subtstet3.py
+     |         |
+     |         +------test.py
+     |
+     +------ other
+                |
+                +---- __init__.py
+                |
+                +---- otherloader.py
+
+Note that if package_loading isn't a package (it doesn't have an __init__.py) module otherloader inpackage other cannot import mainpkg and vice versa. Also a package cannot import beyond its parent level (i.e. max one level up)
+
+
+__init__.py
+
+when import a file from a package the module names becomes the file and the package.
+import portfoliopkg.csvreaderconverter
+
+entryList = portfoliopkg.csvreaderconverter.readcsv('portfolio.csv', 
+	[str,float,int,str], errLevel='pass')
+
+
+in python3 import a module that importing another module fails
+>>> import portfoliopkg.csvreaderconverter_client
+ImportError: No module named 'csvreaderconverter'
+
+it wonders if csvreaderconverter belongs to the pkg or some other pkg.
+It assume it a top level module and can't find it.
+To fix it csvreaderconverter_client could import csvreaderconverter specifying the pkg name portfoliopkg
+csvreaderconverter_client.py:
+import portfoliopkg.csvreaderconverter
+
+or better use the package relative import form
+csvreaderconverter_client.py:
+from . import csvreaderconverter
+
+so modules of a package using module from the package should use the package relative import form
+
+___init__.py
+++++++++++++
+it gets executed when any of the module of the package is loaded.
+This file could be used for some initialization or lift symmbols from some different modules in the package.
+ex:
+from .csvreaderconverter_client import portfolio 
+from .csvreaderconverter import readcsv
+
+this way a user of the pkg could just import the pkg and start using the symbols
+
+ex: 
+portfoliopkg.readcsv(...)
+print(portfoliopkg.portfolio)
+
+
+classes and object: 7.1 (28)
+--------------------
+class Holding(object):
+	def __init__(self, name, date, shares, price):
+		self.name = name
+		self.data = date
+		self.shares = shares
+		self.price = price
+
+self is passed to all the methods
+
+pyhon allow to create attribute on the fly
+h = Holding('ibm', '2019-02-03',120, 34.67)
+
+h.new_attribute = 'stuff' # OK
+
+Possible to del attribute:
+del h.new_attribute
+
+posssible to assign a method
+
+func = h.cost
+func() # would return the value cost calculated
+
+- There are functions to get set or delete attributes
+>>>getattr(h, 'name') # h.name
+>>>setattr(h,'shares', 43) #h.shares = 43
+
+They can b used like
+att_columns=['name','price','shares']
+for col in att_columns:
+	print(col,'=', getattr(h,col))
+
+
+- creation of instances
+use @classmethod as an alternative method to create a instance
+it allows to create a method linked to the class called via the constuctor, create several constructors:
+class Date(object):
+	def __init__(self, year, month , day):
+		self.year = year
+		self.month = month
+		self.day = day
+
+	@classmethod
+	def from_string(cls, s):
+		parts = s.split('-')
+		return cls(int(parts[0]), int(parts[1]), int(parts[2]))
+
+d2 = dateobj.Date.from_string('2016-02-27')
+print('Day: ', d2.day)
+
+The class is pass in the cls argument
+
+
+
+Inheritance: 8 (33)
+-------------
+class Parent(object):
+	def __init__(self, val):
+		self.val = val
+
+	def spam(self):
+		print(self.val)
+
+to call the overiden parent function in the Child
+- in python3
+super().spam();
+- in python 2
+super(Child2, self).spam();
+
+child2.py
+from parent import Parent;
+
+class Child2(Parent):
+	def spam(self):
+		print('spam from child val', self.val)
+		super(Child2, self).spam();
+
+	def othermethod(self):
+		print('othermethod')
+
+
+if __name__ == '__main__':
+	c = Child2(654)
+	c.spam();
+
+To add another attribute to the child use the __init__
+Define __init__ just like in the parent and add extra params
+class Child4(Parent):
+	def __init__(self, val, extra):
+		self.extra = extra
+		super().__init__(val) # necessary otherwise bad things happen
+
+
+c4 = Child4(43, 54)
+c4.val
+c4.extra
+
+Multiple inheritance
+class Child5(Parent, Parent2):
+
+8.2 extension
+
+one can define a contract this contract is used as a base class:
+
+class Formatter(object):
+	# contract definition
+	def headings(self, headers):
+		raise NotImplementedError
+
+	def row(self, rowdata):
+		raise NotImplementedError
+		
+
+Mixin
++++++
+class TextFormatter(formatter.Formatter):
+	def headings(self, headers):
+		for col in headers:
+			print ('{:>10s}'.format(col), end=' ') #end pevents \n
+		print()
+
+	def row(self, rowdata):
+		for item in rowdata:
+			print ('{:>10s}'.format(item), end=' ') #end pevents \n
+		print()
+
+class QuotedMixin(object):
+	def row(self, rowdata):
+		quoted = ['"{}"'.format(d) for d in rowdata]
+		super().row(quoted)
+
+class StarMixin(object):
+	def row(self, rowdata):
+		print('star mixin ')
+		quoted = ['*{}'.format(d) for d in rowdata]
+		super().row(quoted)
+
+#merge the two row method See table.py
+class Format(StarMixin, QuotedMixin, TextFormatter):
+	pass
+
+This special, one can create these mixin or addon classes and somehow merge with other classes implemening the same method.
+The order they are merge detertermine the order of the calls
+
+abstract base class, defensive programming
+++++++++++++++++++++++++++++++++++++++++++
+
+from abc import ABC, abstractmethod
+
+class Formatter(ABC):
+	# contract definition
+
+	#defines the method as abstract
+	@abstractmethod
+	def headings(self, headers):
+		#raise NotImplementedError
+		pass # no need to raise anymore
+
+	@abstractmethod
+	def row(self, rowdata):
+		#raise NotImplementedError
+		pass
+
+Now this class can't be instantiated
+
+We can also do type checking
+if not isisnstance(formatter, Formatter):
+	raise TypeError('dsfdsf')
+
+
+how inheritance works:
+++++++++++++++++++++++
+in case of multiple inheritance super looks for the next class in the order the are defined
+class A(parent)
+class B(parent)
+class C(parent)
+class E(A,B.C)
+
+
+Magic Methods 9 (39)
+---------------------
+
+carrying operation on object 
+x=2
+x*10 uses operaor linked to these object ex x.__mult__(10) or __add__()
+ex: names = ['ibm','mstf' , 'sum'] 
+names[0] eqquiv names.__getitem__(0)
+
+These operator can be overloaded
+class Point(object):
+	def __init__(self, x, y):
+		self.x = x
+		self.y = y
+
+	def __add__(self, other):
+		print('Add ', other)
+
+>>>p = Point(2,3)
+>>>p + 'hello'
+Add hello
+
+-making object printable debuggable
++++++++++++++++++++++++++++++++++++
+
+h=Holding(...)
+print h
+<__main__.Holding object at 0x)0077932>
+
+Printing an object doesn't show what's in the object. To print relevant info:
+add a wrapper method
+
+def __repr__(self) # string representation of the object for programmer use
+	return 'Holding({!r},{!r},{!r},{!r})'.format(self.name, self....)
+
+or the output string
+
+def __str__(self): # this is used by the print function or the string coverter
+	return ' some stuff'
+
+h = Holding(...) or repr(h)
+>>>h
+Holding(...)
+>>>print h or str(h)
+some stuff
+
+- custom container:
++++++++++++++++++++
+
+Let say we create a class around a list. All the fucntion that come with the list are lost with regard od the class.
+Ex: for loop on a list, append on a list, index on a list, len() ...
+
+To fix it the class should implement these magic functions, ex:
+	def __len__(self):
+		return len(self.mylist)
+
+	def __getitem__(self, n):
+		returm self.mylist[n]
+
+	def __iter__(self):
+		return mylist.__iter__()
+
+it is possible to kind of overload these function, ex:
+
+	def __getitem__(self, n):
+		if isinstance(n,str):
+			return [h for h in self.holdingd if h.name == n]
+		else:
+			returm self.holdings[n]
+
+
+
+- custom context manager:
++++++++++++++++++++++++++
+The need to use resources like file, a lock or a db, i.e. open a resource, use it and close it
+ex: 
+	lock = threading.Lock()
+lock.acquire()
+lock.release()
+
+The with keyword allows to prevent the lack of releasing the resouce in case of issues.
+	lock = threading.Lock()
+	with lock:
+		print('using the lock')
+at the end of with the lock is automatically released.
+
+How it works: enters the context manager. the context manager is a calss with 2 special methos __enter__ and __exit__
+
+class Manager(object):
+	def __enter__(self):
+		print('entering')
+		return some_value  # the return value is what receives "as something"
+
+	def __exit__(self, ty, val, tb):
+		print('exiting')
+		print(ty, val, tb)
+
+m = Manager()
+
+>>>with m:
+		print('stuff')
+entering
+stuff
+exiting
+None None None
+
+>>>with m as val:
+		print('stuff')
+		print('val', val)
+		print(ty, val, tb)
+entering
+stuff
+val some value
+exiting
+None None None
+
+ty, val, tb allows to deal with pending exception that could have occur in the __enter__ and __exit__ will deal with it.
+ex:
+>>>with m as val:
+		print('stuff')
+		int('NA') # this would cause an exception
+
+entering
+stuff
+<class 'ValueError'> invalid lietral ......
+
+
+
+Encapsulation 10 (44)
+---------------------
+
+- instance representation, attribute access, naming conventions
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+the dot: 
+h = Holding('IBM', '2017-01-11', 100, 12.43)
+>>>h.name
+IBM
+>>>h.price
+12.43
+
+what happens is each instance of the object has a dictionary that contains the representation of the object.
+>>>h.__dict__
+{
+	name:'IBM',
+	price:12.43,
+	shares:100,
+	date:'2017-01-11'
+}
+
+we can add to the dictionary
+h.__dict__['stuff']='stuff'
+
+The dictionary is populated in the __init__ method.
+the dot actually gain access to the dictionary
+h.name = 'msft'
+
+Methods of the object are not shown in the dictionary.
+ex: the cost method
+The mehods are in the class dictionary not the object
+
+>>>h.__class__
+<class '__main__.Holding'>
+
+>>>Holding.__dict__
+.... cost, sell
+
+>>>Holding.__dict__['cost']
+<FUNCTION hOLDING.COST AT 0X003232>
+>>>Holding.__dict__['cost'](h)
+1243
+
+In python no locking possible private or protected
+As a convention single _ is use to show the intention that the attribute should not be used
+	def __init__(self, value):
+		self._value = value # private intention
+
+
+managed attributes with properties
+++++++++++++++++++++++++++++++++++
+
+taking ownership of dot
+
+h = Holding('IBM', '2017-01-11', 100, 12.43)
+somebody could do
+h.price='lots' python would be happy to change the type of price and the object may even work for  a time.
+To prevent that we add getters and setter with the poperty attributes @property @attributename.setter
+ex:
+class Holding(object)
+	def __init__(self, name, price, shares, date):
+		self.name = name
+		self.price = price
+		self.shares = shares
+		self.date = date
+
+	@property
+	def price(self):
+		return self._price
+
+	@price.setter
+	def price(self, newprice):
+		if not isinstance(newprice, float):
+			raise TypeError('need s a float')
+		self._price = newprice
+
+this allows to take ownership of the dot.
+
+h.price = '232.34' would raise an exception as we passed a string
+
+
+adding property to a function would allow to use the function like if it was a computed attribute
+
+	@property
+	def cost(self):
+		...
+
+>>>h.cost
+1243
+or
+>>>h.cost()
+1243
+
+but 
+>>>h.cost = 2342 # would raise an exception because there is not setter for it
+
+- managed attribute with descriptors:
++++++++++++++++++++++++++++++++++++++
+
+Defining is great but typing 
+	@property
+	def price(self):
+		return self._price
+
+	@price.setter
+	def price(self, newprice):
+100 times would be a lot of code to add to prevent that 
+
+>>>h.name = 'IBM'
+by using the dictionary on h we could access name
+>>>h.__dict__['name'] = 'msft'
+
+For each object python keeps record of what class the object belongs to in __class__
+>>>h.__class__
+<class '__main__.Holding'>
+
+The way python access an attribute is check first wheter the class dictionary of the instance has this attribute.
+If it does, python then asks if this attribute has a __get__ method
+>>>p = h.__class__.__dict__['price']  # price in this case was defined as a property above
+>>>p
+<property object at 0x214356>
+
+>>> hasatrr(p, '__get__')
+
+Then if the property has a __get__ attribute (hasattr would return True) python tries to get the value of the attribute on the instance, p being DEFINED a the class level
+>>>p.__get__(h)
+100
+The same mechanism would be used for set
+>>> p.__set__(h,'23.55') # <= this would throw an exception
+
+The property is a descriptor, the descriptor is an obect that implements the dot, __get__, __set__
+
+
+if p.__get__(h)  if the property was not there I guess python would use gettattr(h,'shares')
+p.__set__(h,200) if the property was not there I guess python would use settattr(h,'shares', 200)
+
+
+Using this mechanism we could eliminate all these @property, @<property name>.setter by defining new descriptor to set properties used in a class to define attribute at the class level not the instance.
+
+class Integer(object):
+'''
+Integer descriptor
+'''
+  def __init__(self, name):
+    self.name = name
+
+  def __get__(self, instance, type):
+    return instance.__dict__[self.name]
+
+  def __set__(self, instance, val):
+    if not isinstance(val, int):
+      raise TypeError('Expecting an int')
+    instance.__dict__[self.name] = val
+
+class Holding(object):
+
+  shares = Integer('shares'); # defined a the class level
+
+  def __init__(self, name, shares, price, date):
+    self.name = name
+    self.shares = shares
+    self.price = price
+    self.date = date
+
+This could be further improved by using inheritance
+
+class BaseType(object):
+	def __init__(self, name):
+		self.name = name
+
+	def __get__(self, instance, type):
+		return instance.__dict__[self.name]
+
+class Integer(BaseType):
+
+  def __set__(self, instance, val):
+    if not isinstance(val, int):
+      raise TypeError('Expecting an int')
+    instance.__dict__[self.name] = val
+
+Using inheritance we could optimize it:
+
+class BaseClass2(object):
+
+  expected_type = object;
+
+  def __init__(self, name):
+    self.name = name
+
+  def __get__(self, instance, type):
+    return instance.__dict__[self.name]
+
+  def __set__(self, instance, val):
+    if not isinstance(val, self.expected_type):
+      raise TypeError('Expecting an int')
+    instance.__dict__[self.name] = val
+
+
+class Integer2(BaseClass2):
+  expected_type = int
+
+class String(BaseClass2):
+  expected_type = str
+
+
+
+class Holding(object):
+
+  shares = Integer2();
+  name = String()
+
+
+ Another way to take ownership of dot (wrappers and proxies)
+ ++++++++++++++++++++++++++++++++++++
+  h.shares is same as
+  h.__getattribute__('shares')
+
+__getattribute__ is called everytime an attribute is accessed and almost never redefined
+
+the related method __getattr__('name') can be redefineb ut it will be called only if the attribute doen't exist.
+So instead of showing an exception when an undefined attribute is accessed __getattr__ wil be executed.
+
+Theres is also the __settattr('name', 'ibm') method
+h.shares = 100
+h.__setattr__('shares', 100)
+
+same h.__delattr__('name') eq del h.name
+
+These method could be used to limit the set of attributes that could be set on an object:
+class Holding(object):
+	def __init__(self, name, price, date, shares):
+		....
+	def __setattr__(self, name, value):
+		if name not in {'name', 'shares', 'price', 'date'}:
+			raise AttributeError('attribut not allowed {}'.flormat(name))
+		super().__setattr__(name, value)
+
+
+
+Proxy object:
+++++++++++++
+
+These __setattr__ and __getattr__ can be used to create a wrapper or proxy object
+ex:
+class ReadOnly(object):
+	def __init__(self, someobject):
+		self._obj = someobject
+
+	def __getattr__(self, name):
+		return getattr(self._obj, name)
+
+	def __setattr__(self, name, value):
+		if name == '_obj':
+			super().__setattr__(name, value)
+		else:
+			raise AttributeError('Read only object')
+
+h = ReadOnly(Holding('ibm', 200, 32.78, '2017-01-01'))
+
+h.price
+32.78
+h.price = 99.99
+would throw the exception
+
+Another usage is to do a pseudo inheritance by adding a __getattr__ to a class:
+ex:
+class Portfolio(object):
+
+	def __init__(self):
+		self.holdings = []
+
+	def othermethod(self, ...):
+		....
+this Portfolio is kind of a list but doesn't have any of the list method like, len, append ....
+To add them just add:
+	def __getattr__(self, name):
+		return getattr(self.holdings, name)
+
+p = Portfolio()
+p.append(...)	would work
+
+
+
+Function Closure 11: (50)
+----------------------
+
+functions are first class objects in python and can be passed around just like regular arguments.
+
+def func(param, funcparam):
+	print('param:', param)
+	print('Calling ',funcparam.__name__)
+	funcparam()
+
+def func2():
+	print('I am ', self.__name__)
+
+def func3(something):
+	print('I am func3 my param is {}'.format(something))
+
+func('hello', func2)
+
+calling func3 from func would not work bc function needs 1 argument
+A way to fix this pb is to pass func3 thru a lambda
+
+func('hello', lambda : func3('the argument')) # this lambda takes no argument and restuns fun3(param)
+
+A way to callback a function with argument could be as well:
+def caller(param, funcparam):
+  print('param:', param)
+  print('Calling ',funcparam.__name__)
+  funcparam(param)
+
+def func4(*argv):
+  print('I am func3  and was called bac with param  is{}'.format(argv))
+
+caller('stuff', func4)
+
+
+
+Python has closure, i.e. functions defined with a context:
+
+import time
+def add(x, y):
+	print('defining my closure')
+	def adding():
+		print(' adding {} {} in 2 sec'.format(x,y))
+		time.sleep(2)
+		return x+y
+	return adding
+
+op = add(2,5)
+res = op();
+
+
+op()
+7
+
+
+Function could be used to for instance create properties that would do type checking for instance
+
+def typecheck(propname, expected_proptype):
+	private_propname = '_'+name
+	
+	@property
+	def prop(self:
+		gettattr(self, private_propname)
+
+	@prop.setter
+	def prop(self, value):
+		if not isinstance(value, expected_proptype):
+			raise TypeError('Expceted {}'.format(expected_proptype))
+		settattr(self, private_propname, value)
+
+	return prop
+
+class Holding(object):
+	shares = typecheck('shares', int)
+	price = typecheck('price', float)
+
+	def __init__(name, price, shares, date):
+		self.name = name
+		self.price = price
+		self.shares = shares
+		self.date = date
+
+To make it more inituitive a lambda function can be used (more semantic)
+
+Interger = lambda name : typecheck(name, int)
+Float = lambda name : typecheck(name, float)
+String  = lambda name : typecheck(name, int)
+
+the lambda take one param and returns the function or closure
+then we can do :
+shares = Float('share')
+....
+
+
+
+
+Meta programming 12(53)
+------------------------
+a function can be called with arguments passed by position or by keyword
+def func(a,b,c):
+   ....
+
+func(1,2,3)
+func(b=2,a=1,c=3)
+
+Another way to define and call a function is:
+def func(a, *args) # this way the function must be called with at least one argument and many others by position
+	print a
+	print args
+
+func(1)
+func(1,2,3,4)
+arg will show as a set (2,3,4)
+
+Same principle but with keyword arguments:
+def func(a, **kwargs) # this way the function must be called with at least one argument and many others by keywors
+	print a
+	print kwargs
+
+kwargs will show as a dictionary {arg1 : 1, arg2= 2}
+>>>func(1, one=1, two=2)
+{"one":1, "two":2}
+
+
+to defined a function that takes any number of arguments by position or keyword we do:
+def func(*arg, **kwarg)
+
+>>>func()
+>>>func(1,2,3,4, a=1, b=2 )
+
+it's also possible to call these functions with a tuple and a dict
+def func(x,y,a,b):
+	print(x,y,a,v)
+
+arg(1,2)
+kwarg = {'a':3, 'b':4}
+>>>func(*arg, **kwarg)
+1 2 3 4
+
+This technic could be used to create wrapper function that doesn't know about the number of argument needed to call another function:
+def func(x,y):
+	.....
+
+def wrapper(*arg, **kwarg):
+	print('I am a wrapper')
+	func(*arg, **kwarg)
+
+>>>wrapper(1,3)
+
+decorators
+++++++++++
+
+usage ex: adding logging to a function one could use a wrapper:
+def log(func):
+	def wrapper(*arg, **kwarg):
+		print('logging {}'.format(func.__name__))
+		return func(*arg, **kwarg)
+	return wrapper
+
+def add(x,y):
+	return x+y
+
+>>>add = log(add)
+>>>add(1,4)
+logging add
+5
+
+We just decorated add.
+To make it clearer python has this syntax @ to say we are decorating the function.
+So instead of  writting
+def add(x,y):
+	return x+y
+add = log(add)
+
+we can just write, 
+@log
+def add(x,y):
+	return x+y
+meaning we are defining the function and then wrapping it.
+
+The problem with this pattern is that decorated functions look different
+>>>add
+<function log.<locals>.wrapper at 0x789679>
+>>>help(add)
+wrapper(*arg, *kwarg)
+To alleviate this problem we could reassign the wrapper name and doc string
+def log(func):
+	def wrapper(*arg, **kwarg):
+		print('logging {}'.format(func.__name__))
+		return func(*arg, **kwarg)
+
+	wrapper.__name__ = func.__name__
+	wrapper.__doc__ = func.__doc__
+	return wrapper
+
+Reminder to see all the attributes defined on an object:
+********
+dir(object)
+ex: dir(add)
+
+There is a python decorator that does it for us:
+from functools import wraps
+
+def log(func):
+	@wraps(func)
+	def wrapper(*arg, **kwarg):
+		print('logging {}'.format(func.__name__))
+		return func(*arg, **kwarg)
+
+	return wrapper
+
+decorators with arguments
++++++++++++++++++++++++++
+In orfer to pass argument to a decorator we need to redefine the decorator as a closure, i.e. wrap it:
+If we want to pass a formatting string to the decorator we would do:
+
+def logformat(fmt):
+	def log(func):
+		@wraps(func)
+		def wrapper(*arg, **kwarg):
+			print(fmt.format(func.__name__))
+			return func(*arg, **kwarg)
+
+		return wrapper
+	return log
+
+@logformat('logging with formatting argument {}')
+def add(x,y):
+	return x+y
+
+@logformat('logging with formatting argument {}')
+def sub(x,y):
+	return x - y
+
+One of the issues here is that we repeat the formatting string over and over: 'logging with formatting argument {}'
+What we could do is just define a variable to hold the decorator with the parameter and use it everywhere. It's possible bc the decorator with parameter syntax is a nested function call.
+
+logging = logformat('logging with formatting argument {}')
+
+and then
+@logging
+def add(x,y):
+	return x+y
+
+
+class decorators:
++++++++++++++++++++
+class Spam(object):
+	def __init__(self, value):
+		self.value = value
+	def meth1(self):
+		print('meth1')
+	def meth2(self):
+		print('meth2')
+
+vars() on a class returns all the attibutes of a class in a dictionary (a bit like dir() returns all the magic attributes on an object).
+
+>>>vars(Spam)
+dict_proxy({'__module__': '__main__', 'meth2': <function meth2 at 0x7fe4edd78de8>, 'meth1': <function meth1 at 0x7fe4edd78d70>, '__dict__': <attribute '__dict__' of 'Spam' objects>, '__weakref__': <attribute '__weakref__' of 'Spam' objects>, '__doc__': None, '__init__': <function __init__ at 0x7fe4edd78cf8>})
+
+So if we would want to add a decorator on a class that acts on all the methods the decorator would go thru the list of methods to decorate them with a "function" decorator.
+
+vars(Spam).items() returns the attributes as a list of tuples.
+So we can write a decorator that goes thru all the methods and replace them their decorated values.
+
+def logmethod(cls):
+	for key, value in list(vars(cls).items):
+		# test if the attribute is callable so a method we reassign the key with a decorated version of the method
+		if callable(value): 
+			setattr(cls,key, logging(value))
+	return cls
+
+This class decorators could be used to redesign and  avoid cumbersomr shares = Integer2('shares') where shares shows twice.
+class BaseClass2(object):
+
+  expected_type = object;
+
+  def __init__(self, name = None): # make the name optional
+    self.name = name
+
+  def __get__(self, instance, type):
+    return instance.__dict__[self.name]
+
+  def __set__(self, instance, val):
+    if not isinstance(val, self.expected_type):
+      raise TypeError('Expecting an int')
+    instance.__dict__[self.name] = val
+
+
+class Integer2(BaseClass2):
+  expected_type = int
+
+class String(BaseClass2):
+  expected_type = str
+
+
+
+class Holding(object):
+
+  shares = Integer2('shares')
+  name = String('name')
+
+# defining a decorator going thru the list of attribets having
+# a type BaseClass2 and setting their names to the key of 
+# the (key, value) pair
+def class_check(cls):
+	for key, value in vars(cls).items():
+		if isinstance(value, BaseClass2):
+			value.name = key
+	return cls
+
+And then redefine the class in a simpler way
+@class_check
+class Holding(object):
+
+  shares = Integer2()
+  name = String()
+
+Even crazier we could define a function on top of class_check that would take a dictionary as argument to define the  (value, name).
+ def crazy(**kwarg):
+	def class_check(cls):
+		for name, value in kwarg.items():
+			setattr(cls,name, value(name))
+		return cls
+	return class_check
+
+@crazy(name=String, shares = Integer2)
+class Holding(object):	
+	def __init__(self, name, shares, price, date):
+		self.name = name
+		self.shares = shares
+		self.price = price
+		self.date = date
+
+
+Metaclasses 14 (62)
+------------
+The way the for loop works is python asks the object if it has a iter method and then use it
+
+name= ['a','b','c']
+for l in name:
+	print(l)
+
+it = name.__iter__()
+it. __next__()
+it.__next__() # ... until it receive a StopIteration exception
+
+Same for a file
+
+f=file.open('file', 'r')
+line = f.__iter__().__next__()
+
+To customize iteration we can create a generator.
+The generator kind of hold the items and return them in a for loop.
+Generator can be used only once. It holds the function in a susended state and returns an iterator.
+
+def count(n):
+	print('Counting from ', n)
+	while n > 0:
+		yield n
+		n -= 1
+	print('All done')
+
+
+g = count(5)
+for i in g:
+	print(i) # will show the decount
+but if I do it again it won't show anything
+for i in g:
+	print(i) # will NOT show the decount a second time
+
+or 
+it = g.__iter__()
+it.__next__() # wakes up the function an returns the next value.
+
+5
+
+It could be used to create a grep
+def grep(pattern, file):
+	with open(file, 'r')  as f:
+		for line in f:
+			if pattern in line:
+				yield line
+
+
+grp = grep('def', '../Python tips' )
+
+for l in grp:
+	print(l)
+
+There is something similar to the list comprehension that creates a generator:
+list comprehension ex: l = [x*x for x in [1,2,3, 4]]
+generator ex:  g = (x*x for x in [1,2,3, 4])
+for i in g:
+	print i
+
+It is more efficient to pass a generator to a function than a list.
+in this case we can drop the parenthesis
+func((x*x for x in [1,2,3, 4]))
+func(x*x for x in [1,2,3, 4]) #<= drop ()
+
+A trick to reuse a generator is to define a class that redefine iter as a generator
+
+class Count(object):
+	def __init__(self, n):
+		self.n = n
+
+	def __iter__(self):
+		count = self.n
+		while count > 0:
+			yield count
+			count -=1
+
+c = Count(5)
+for i in c:
+	print i
+
+simple tail function
+import os
+import time
+
+with open('log') as f:
+	f.seek(0, os.SEEK_END)
+	while True:
+		line = f.readline()
+		if not line:
+			time.sleep(0.1)
+			countinue
+
+		print(line)
+
+
+this could be genarator
+import os
+import time
+
+
+def tail(file):
+	with open(file) as f:
+		f.seek(0, os.SEEK_END)
+		while True:
+			line = f.readline()
+			if not line:
+				time.sleep(0.1)
+				continue
+			yield line
+for l in tail('somelog'):
+	print(l)
+
+workflow data processing with generator
+++++++++++++++++++++++++++++++++++++++++
+The idea is to use iteration for data processing and pipe the result of one flow in the next flow. As long as each flow implement __iter__ we can chain them.
+ex:
+for l in tail('somelog'):
+	parts = l.split(',')
+	if part[2] < 0:
+		print('{:>10s} {:>10s} {:>10.2f} {:>8s}'.format(part[0], part[1], part[2], part[3]))
+
+or piping flows:
+import csv
+
+lines = tail('somelog')
+rows = csv.reader(lines)
+
+could define a grep generator:
+def grep(keywords, rows):
+	for row in rows:
+		if row[0] in keywords:
+			yeld row
+
+lines = tail('somelog')
+lines is a generator
+rows = csv.reader(lines)
+filter_rows = grep({'IBM','MSFT'}, rows)
+filter_rows is a generator
+
+let's say we wanted to convert the row elements to
+name, price, shares, date
+types=[str, float, int, str]
+we could
+generator_converter = ( [func(val) for func, val in zip(types, row)] for row in filter_rows)
+
+
+coroutines python > 3.5 
+-----------------------
+
+Coroutine is the function that runs under the supervision of a manager.
+They used async and await.
+
+async def greeting(name):
+	print ('Hello', name)
+
+print greeting('Philippe') would not show the result but just 
+<coroutine ... >
+To actually run it
+import asyncio
+loop = asyncio.get_event_loop();
+g=greeting('Philippe')
+loop.run_until_complet(g)
+
+A coroutine could be called by another coroutine provided it is preceded with await:
+
+async def call_greting():
+	names=['me','you','philippe']
+	for name in names:
+		print(await greeting(name))
+
+c = call_greting()
+loop.run_until_complet(c)
+
+
+Threading model in a client server context would not scale up well if there were 1000s connection. But coroutine would shine.
+
+The way it works is based on generators/yield:
+Back to greeting the way it woks is python invoke a send method on the coroutine:
+>>>g.send(None)
+StopIiteration: hello philippe # the exception has the messager error Hello Philippe
+
+Yield is normally used to emit some value but can also return a result
+
+def coro():
+	n=0
+	while True:
+		result = yield n # emitiing and receiving a result
+		print('Got result:', result)
+		n +=1
+
+c = coro()
+c._nnext__()
+0
+c.send('Hello')
+got result Hello
+1
+So send makes it emit 1 and receive Hello
+This is what's driving the async environment
+
+
