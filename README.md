@@ -5,6 +5,7 @@ Various tips for
 - sass ccs compiler
 - css css grid
 - vuex (kinda redex) nuxt (framework)
+- book cdoe clean
 
 ...
 
