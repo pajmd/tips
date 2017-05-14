@@ -4,7 +4,7 @@ Python tips:
 
 debugging:
 +++++++++
-- Load the program with  python -i. If it was raising an exception, it will stop and it will be possinble to poke around like printin some variables.
+- Load the program with  python -i. If it was raising an exception, it will stop and it will be possinble to poke around like print some variables.
 
 - At this point it is also possbile to start the debugger by importing pdb
 python -i scrit.py
@@ -17,7 +17,7 @@ it will show were the script stopped
 (pdb) quit
 >>>
 
-- Another option is to start de debugger in the script by importing within the code pdb and calling set_trace() where we went to stop
+- Another option is to start the debugger in the script by importing within the code pdb and calling set_trace() where we went to stop
 import pdb; pdb.set_trace() #launches the debugger
 
 python scrit.py # no need for -i
@@ -181,7 +181,7 @@ for rownum, i in enumerate(range[10], start=1)
 	print('something')
 
 # option to print error willingly
-def dosomething(par1, errlevel='warn') # otpinal argument
+def dosomething(par1, errlevel='warn') # otpional argument
 	for rownum, i in enumerate(range[10], start=1)
 
 		try:
@@ -349,7 +349,7 @@ names[]
 for holding in portfolio:
 	names.append(holding['name'])
 
-# or filetering on price > 100
+# or filtering on price > 100
 more100 = []
 for holding in portfolio:
 	if holding['price'] > 100
@@ -369,9 +369,47 @@ total = sum([holding['price'] for holding in portfolio])
 #or
 [holding['name'] for holding in portfolio if holding['price'] > 100]
 
-#to get name of shares without duplicates
+# use a set to get name of shares without duplicates
+----------------------------------------------------
+no_dup = {holding['name'] for holding in portfolio}
 
-no_dup = {holding['name' for holding in portfolio]}
+generator vs list comprehension and conditional:
+------------------------------------------------
+portfolio = [
+{
+  'name' : 'INB',
+  'date' : '20170130',
+  'price' : 12.43
+},
+{
+  'name' : 'IBM',
+  'date' : '20160410',
+  'price' : 102.43
+},
+{
+  'name' : 'SUN',
+  'date' : '20101231',
+  'price' : 412.50
+},
+{
+  'name' : 'IBM',
+  'date' : '20170213',
+  'price' : 120.30
+}
+]
+gen = (holding['name'] for holding in portfolio if holding['price'] > 100.00)
+generators can be itereated only once (see toward the end)
+lst = [holding['name'] for holding in portfolio if holding['price'] > 100.00)]
+
+* unpacks the sequence/collection into positional arguments
+** does the same, only using a dictionary and thus named arguments
+print('{}, {}, {}'.format(*gen))
+print('{}, {}, {}'.format(*lst))
+
+generators can't be sliced when lists can
+print('slice list {}'.format(lst[0:2]))
+for i, item in enumerate(lst):
+    print('iterate list lst[{index}]={security}'.format(security=item, index = i))
 
 namestr = ','.join(no_dup) # create a str comma separates
 namestr.split(',') # create a list
@@ -420,10 +458,10 @@ Libray Module Packages: 6.1 (25)
 import
 ++++++
 by doing an import a module(file.py) gets created in the program
-import does actually run the whole program so it the file
+import does actually run the whole program so if the file
 ends with a function call, the function call will happen
 The import stuff will create the namespace stuff
-The module (import name) need to be used to see the content of the file
+The module (import name) needs to be used to see the content of the file
 ex: 
 simple.py
 x=42
@@ -464,7 +502,7 @@ env PYTHONPATH=some/dir
 If  the library is actually a script that calls at the end some function it is better to protect these calls with an if statement
 that checks the name of the module whether it is the main module 
 
-if __name-- == '__main__':
+if __name__ == '__main__':
 	print('stuff')
 	func()
 
@@ -472,7 +510,7 @@ as soon as the file is imported it's name is no longer main but the name of the 
 
 Difference between import sys and from sys import * is that 
 - in the first form the name sys is brought in the module that does the import. So to access what's defined in sys we have to do sys.exit() or sys.dict()
-- in the second form we could just do exit(). The problem with the second form is that we would hide and exit define in our modulr before the import.
+- in the second form we could just do exit(). The problem with the second form is that we would hide and exit define in our module before the import.
 
 packages:
 +++++++++
@@ -517,7 +555,7 @@ package_loading
                 |
                 +---- otherloader.py
 
-Note that if package_loading isn't a package (it doesn't have an __init__.py) module otherloader inpackage other cannot import mainpkg and vice versa. Also a package cannot import beyond its parent level (i.e. max one level up)
+Note that if package_loading isn't a package (it doesn't have an __init__.py) module otherloader in package other cannot import mainpkg and vice versa. Also a package cannot import beyond its parent level (i.e. max one level up)
 
 
 __init__.py
@@ -534,7 +572,7 @@ in python3 import a module that importing another module fails
 ImportError: No module named 'csvreaderconverter'
 
 it wonders if csvreaderconverter belongs to the pkg or some other pkg.
-It assume it a top level module and can't find it.
+It assumes it a top level module and can't find it.
 To fix it csvreaderconverter_client could import csvreaderconverter specifying the pkg name portfoliopkg
 csvreaderconverter_client.py:
 import portfoliopkg.csvreaderconverter
@@ -588,7 +626,7 @@ func() # would return the value cost calculated
 >>>getattr(h, 'name') # h.name
 >>>setattr(h,'shares', 43) #h.shares = 43
 
-They can b used like
+They can be used like
 att_columns=['name','price','shares']
 for col in att_columns:
 	print(col,'=', getattr(h,col))
@@ -1287,6 +1325,8 @@ def func(x,y,a,b):
 
 arg(1,2)
 kwarg = {'a':3, 'b':4}
+* unpacks the collection into positional arguments
+** unpacks using a dictionary and thus named arguments
 >>>func(*arg, **kwarg)
 1 2 3 4
 
