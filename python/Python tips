@@ -1545,7 +1545,7 @@ line = f.__iter__().__next__()
 
 To customize iteration we can create a generator.
 The generator kind of hold the items and return them in a for loop.
-Generator can be used only once. It holds the function in a susended state and returns an iterator.
+A generator can be used only once. It holds the function in a suspended state and returns an iterator.
 
 def count(n):
 	print('Counting from ', n)
@@ -1707,19 +1707,19 @@ Threading model in a client server context would not scale up well if there were
 The way it works is based on generators/yield:
 Back to greeting the way it woks is python invoke a send method on the coroutine:
 >>>g.send(None)
-StopIiteration: hello philippe # the exception has the messager error Hello Philippe
+StopIiteration: hello philippe # the exception has the message error Hello Philippe
 
 Yield is normally used to emit some value but can also return a result
 
 def coro():
 	n=0
 	while True:
-		result = yield n # emitiing and receiving a result
+		result = yield n # emitting and receiving a result
 		print('Got result:', result)
 		n +=1
 
 c = coro()
-c._nnext__()
+c._next__()
 0
 c.send('Hello')
 got result Hello
