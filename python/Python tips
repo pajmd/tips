@@ -1708,13 +1708,16 @@ loop.run_until_complet(c)
 
 
 Threading model in a client server context would not scale up well if there were 1000s connection. But coroutine would shine.
+Threads use a lot of memory just to set up. Thread don't really run in parallel because of the Global Interpretor Lock mechanism.
+Threads are only good to organize a program that does blocking IO.
 
 The way it works is based on generators/yield:
 Back to greeting the way it woks is python invoke a send method on the coroutine:
 >>>g.send(None)
 StopIiteration: hello philippe # the exception has the message error Hello Philippe
 
-Yield is normally used to emit some value but can also return a result
+Yield is normally used to emit some value but can also receive a result send by the consumer of the generator.
+The value is received after each yield expresion.
 
 def coro():
 	n=0
@@ -1724,12 +1727,12 @@ def coro():
 		n +=1
 
 c = coro()
-c._next__()
+c.__next__() # to prome the generator
 0
 c.send('Hello')
 got result Hello
 1
 So send makes it emit 1 and receive Hello
 This is what's driving the async environment
-
+The coroutime pauses at each yield and resumes after each send
 
