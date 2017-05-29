@@ -375,6 +375,7 @@ no_dup = {holding['name'] for holding in portfolio}
 
 generator vs list comprehension and conditional:
 ------------------------------------------------
+a generator is something that returns an iterator
 portfolio = [
 {
   'name' : 'INB',
@@ -410,6 +411,7 @@ generators can't be sliced when lists can
 print('slice list {}'.format(lst[0:2]))
 for i, item in enumerate(lst):
     print('iterate list lst[{index}]={security}'.format(security=item, index = i))
+But a generator can easily be transformed in a list ex: l = list(gen)
 
 namestr = ','.join(no_dup) # create a str comma separates
 namestr.split(',') # create a list
@@ -1545,6 +1547,9 @@ line = f.__iter__().__next__()
 
 To customize iteration we can create a generator.
 The generator kind of hold the items and return them in a for loop.
+A generator is a function that uses yield.
+When called a generator doesn't actually runs but retirns an iterator.
+Each time next is called on the generator the next value passed to yield is returned.
 A generator can be used only once. It holds the function in a suspended state and returns an iterator.
 
 def count(n):
