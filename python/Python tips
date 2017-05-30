@@ -688,11 +688,31 @@ if __name__ == '__main__':
 
 To add another attribute to the child use the __init__
 Define __init__ just like in the parent and add extra params
+In python 3 using the implicit method:
 class Child4(Parent):
 	def __init__(self, val, extra):
 		self.extra = extra
 		super().__init__(val) # necessary otherwise bad things happen
 
+In python 3 using the explicit method:
+class Child4(Parent):
+	def __init__(self, val, extra):
+		self.extra = extra
+		super(__class__, self).__init__(val) # necessary otherwise bad things happen
+
+In python 2:
+class Child4(Parent):
+	def __init__(self, val, extra):
+		self.extra = extra
+		super(Child4, self).__init__(val) # necessary otherwise bad things happen
+
+Using the __init__ method of the parent to init the class IS NOT SAFE if there is multiinheritance 
+because the order of the init is not specified accross all subclass
+class Child4(Parent):
+	def __init__(self, val, extra):
+		self.extra = extra
+		Child4.__init__(val) # necessary otherwise bad things happen
+It only works for simple hiearachies or for when the base class was define with an older version of python
 
 c4 = Child4(43, 54)
 c4.val
