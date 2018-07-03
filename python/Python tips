@@ -977,6 +977,35 @@ As a convention single _ is use to show the intention that the attribute should 
 		self._value = value # private intention
 
 
+Fun way to transfor a dictionary to a do access object:
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+def to_dot(**dico):
+    return type("dot", (), dico)
+    
+mode = {
+    "size": "medium",
+    "car": {
+        "wheel": 6,
+	"options": [
+	    "AC", "SATANAV", "Airbags",
+	    {
+	        "drive": 4,
+		"diffferential": "autoblock"
+	    }
+	 ]
+     }
+  }
+  
+dot_model = to_dot(**model)
+print(dot_model.size)
+print(dot_model.car)
+if isinstance(dot.car, dict):
+    dot_model.car = to_dot(**dot_model.car)
+if isinstance(dot_mode.car.options, list):
+for each item see if there is a dict to translate
+dot_mode.car.options[i] = to_dot(**item)
+
+
 managed attributes with properties
 ++++++++++++++++++++++++++++++++++
 
