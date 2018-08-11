@@ -1394,6 +1394,12 @@ def wrapper(*arg, **kwarg):
 decorators
 ++++++++++
 
+Very good
+http://blog.thedigitalcatonline.com/blog/2015/04/23/python-decorators-metaprogramming-with-style/
+
+Less good
+https://medium.com/@vadimpushtaev/decorator-inside-python-class-1e74d23107f6
+
 usage ex: adding logging to a function one could use a wrapper:
 def log(func):
 	def wrapper(*arg, **kwarg):
