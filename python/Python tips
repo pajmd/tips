@@ -648,6 +648,10 @@ for col in att_columns:
 
 - creation of instances
 use @classmethod as an alternative method to create a instance
+
+For @classmethod and @staticmethod explanation see: 
+https://stackoverflow.com/questions/12179271/meaning-of-classmethod-and-staticmethod-for-beginner
+
 it allows to create a method linked to the class called via the constuctor, create several constructors:
 class Date(object):
 	def __init__(self, year, month , day):
