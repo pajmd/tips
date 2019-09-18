@@ -79,3 +79,7 @@ git merge origin/master
 ```
 At this point origin/master and master branches now point to the same commit, and you are synchronized 
 with the upstream developments
+
+
+### references
+* https://www.atlassian.com/fr/git/tutorials
