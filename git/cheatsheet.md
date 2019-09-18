@@ -6,14 +6,15 @@ HEAD is actually a special type of reference that points to another reference.
 It may point to master or it may not (it will point to whichever branch is currently checked out).  
 If you know you want to be committing to the master branch then push to this.  
 
-HEAD
-  |
-  v
-MASTER--> * <-- remotes/origin/master
-          |
-          *  *<-- remotes/origin/whatever
-          | /
-          *  
+HEAD  
+  |  
+  v  
+MASTER--> * <-- remotes/origin/master  
+          |  
+          *  *<-- remotes/origin/whatever  
+          | /  
+          *    
+          
 To check where the HEAD is pointing to :
 ```
 git symbolic-ref HEAD
@@ -57,3 +58,24 @@ git checkout -b local_feature_branch
 ```
 Here we have created a new local branch named local_feature_branch this puts updates HEAD 
 to point at the latest remote content and we can continue development on it from this point.
+
+#### Synchonize
+To synchronize local repository with the central repository's master branch.
+```
+git fetch origin
+```
+To see what commits have been added to the upstream master:
+```
+git log --oneline master..origin/master
+```
+
+To approve the changes and merge them into your local master 
+
+```
+git checkout master  
+git log origin/master
+then
+git merge origin/master
+```
+At this point origin/master and master branches now point to the same commit, and you are synchronized 
+with the upstream developments
