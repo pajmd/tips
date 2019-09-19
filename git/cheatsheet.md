@@ -1,3 +1,26 @@
+#### create a new local repo
+In the folder where the project is located
+```
+gini init
+```
+
+#### To push newly created repo (github gives the intructions)
+* go to github to create the remote repo and obtain the repo url
+* add the remote repo url to git config
+```
+git remote add <remote_name> <remote_repo_url>
+ex:  
+git remote add origin https://github.com/pajmd/bash_workspace.git
+```
+a ref on origin is created in .git/config  
+
+* push local branch to the remote name
+```
+git push -u <remote_name> <local_branch_name>
+ex:  
+git push -u origin master
+```
+
 #### MASTER vs HEAD
 master is a reference to the end of a branch. 
 By convention (and by default) this is usually the main integration branch, but it doesn't have to be.  
