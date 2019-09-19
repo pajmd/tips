@@ -103,6 +103,33 @@ git merge origin/master
 At this point origin/master and master branches now point to the same commit, and you are synchronized 
 with the upstream developments
 
+#### diff
+* local
+to see the changes: 
+```
+git status 
+```
+to see the difference for a specifi file
+```
+git diff path/file
+```
+* compare to remote
+first fetch the remote
+```
+git fetch
+```
+to see all the branches
+```
+git branch -a
+```
+to diff
+```
+git diff <masterbranch_path> <remotebranch_path>
+ex:  
+git diff master origin/master
+
+```
+
 
 ### references
 * https://www.atlassian.com/fr/git/tutorials
