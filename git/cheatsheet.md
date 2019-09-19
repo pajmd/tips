@@ -104,8 +104,8 @@ At this point origin/master and master branches now point to the same commit, an
 with the upstream developments
 
 #### diff
-* local  
-to see the changes: 
+* local diff  
+to see the changes 
 ```
 git status 
 ```
@@ -113,7 +113,7 @@ to see the difference for a specifi file
 ```
 git diff path/file
 ```
-* compare to remote  
+* remote diff  
 first fetch the remote  
 ```
 git fetch
