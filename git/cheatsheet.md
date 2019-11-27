@@ -162,6 +162,17 @@ TO untack file that could have come from another previously current branch
 git rm --cached -r .
 ```
 
+To push it to the remote empty:  
+First commit it as "allow-empty".   
+Then untrack if any, files that could have been created in a previous branch.  
+Finally push it to the remote
+```
+git push -u origin master
+git rm --cached -r .
+git commit --allow-empty -m "empty fot now"
+git push -u origin master
+```
+
 
 
 ### references
