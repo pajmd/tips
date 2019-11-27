@@ -174,7 +174,8 @@ rm file1 file2 ..
 git commit --allow-empty -m "empty fot now"
 git push -u origin master
 ```
-
+##### Note:  
+Master and initial are entirely different commit histories. Therefore pull request wont be possible.
 
 
 ### references
