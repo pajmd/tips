@@ -82,7 +82,7 @@ git checkout -b local_feature_branch
 Here we have created a new local branch named local_feature_branch this puts updates HEAD 
 to point at the latest remote content and we can continue development on it from this point.
 
-#### Synchonize
+#### Synchronize
 To synchronize local repository with the central repository's master branch.
 ```
 git fetch origin
@@ -129,6 +129,39 @@ ex:
 git diff master origin/master
 
 ```
+
+#### Delete branches
+Local delete: 
+ git branch -d <branch_name>  
+ 
+Example deleting the master branch:
+```
+git branch -d master
+```
+Remote delete:  
+git push -d <remote_name> <branch_name>
+```
+git push -d origin master
+```
+
+#### Create a new branch from the current branch (copy of the current branch)
+```
+git checkout -b [name_of_your_new_branch]  
+```
+then push it to the remote
+```
+git push
+```
+
+#### Create a new empty branch
+```
+git checkout --orphan <branchname>
+```
+TO untack file that could have come from another previously current branch
+```
+git rm --cached -r .
+```
+
 
 
 ### references
