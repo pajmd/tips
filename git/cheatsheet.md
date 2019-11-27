@@ -165,10 +165,12 @@ git rm --cached -r .
 To push it to the remote empty:  
 First commit it as "allow-empty".   
 Then untrack if any, files that could have been created in a previous branch.  
+Physically remove them in case you want to switch to a previous branch withou working on these files.
 Finally push it to the remote
 ```
 git push -u origin master
 git rm --cached -r .
+rm file1 file2 ..
 git commit --allow-empty -m "empty fot now"
 git push -u origin master
 ```
