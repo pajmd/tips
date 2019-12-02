@@ -153,8 +153,8 @@ then push it to the remote
 git push
 ```
 ### Starting a project with a master branch and child branches
-We could create a remote git repo and the clone it or local one.  
-Local:  
+We could either create a remote git repo and then clone it or create a local one.  
+#### Starting from Local:  
 ```
 > git init
 > git status
@@ -197,7 +197,6 @@ file1
 
 ```
 
-We end up with a master branch. 
 
 #### Create a new empty branch (Tricky not advisable)
 ```
