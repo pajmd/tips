@@ -189,9 +189,10 @@ From .
 > git ls-tree -r --name-only dev
 f1
 file1
-> 
-> 
-> 
+# create remote repo and add it to the config
+> git remote add origin https://github.com/PyPajmd/todel.git
+> git push -u origin master
+> git push -u origin dev
 > 
 
 ```
