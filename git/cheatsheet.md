@@ -1,6 +1,6 @@
 1. [create a new local repo][#### create a new local repo]
-2. [To push newly created repo][#### To push newly created repo (github gives the intructions)]
-3. [MASTER vs HEAD][#### MASTER vs HEAD]
+1. [To push newly created repo][#### To push newly created repo (github gives the intructions)]
+ [MASTER vs HEAD][#### MASTER vs HEAD]
 4. [][]
 5. [][]
 6. [][]
