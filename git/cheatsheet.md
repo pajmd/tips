@@ -4,10 +4,18 @@
 1. [Push newly created repo](#Push-newly-created-repo)  
 1. [MASTER vs HEAD](#MASTER-vs-HEAD)
 4. [diff with a remote branch](#Diff-With-a-remote-branch)
-5. [][]
-6. [][]
-7. [][]
-8. [][]
+5. [Configure a remote repo](#Configure-a-remote-repo)
+6. [Synchronize](#Synchronize)
+6. [diff](#diff)
+6. [Delete branches](#Delete branches)
+6. [Create a new branch from the current branch](#Create-a-new-branch-from-the current-branch)
+6. [Starting a project](#Starting_a_project)
+6. [Create a new empty branch](#Create-a-new-empty-branch)
+6. [](#)
+6. [](#)
+6. [](#)
+6. [](#)
+6. [](#)
 
 #### create a new local repo
 In the folder where the project is [located]
@@ -16,7 +24,7 @@ gini init
 ```
 
 #### Push newly created repo 
-*Note:* github gives the intructions
+**Note:** github gives the intructions after create the remote (origin) repo
 
 * go to github to create the remote repo and obtain the repo url
 * add the remote repo url to git config
@@ -157,7 +165,8 @@ git push -d <remote_name> <branch_name>
 git push -d origin master
 ```
 
-#### Create a new branch from the current branch (copy of the current branch)
+#### Create a new branch from the current branch 
+-copy of the current branch-
 ```
 git checkout -b [name_of_your_new_branch]  
 ```
@@ -165,7 +174,8 @@ then push it to the remote
 ```
 git push
 ```
-### Starting a project with a master branch and child branches
+### Starting a project
+We need a master branch and first feature branches from which will create PRs and then merge to master
 We could either create a remote git repo and then clone it or create a local one.  
 #### Starting from Local:  
 ```
@@ -176,6 +186,10 @@ On branch master
 fatal: Not a valid object name: 'master'.
 
 > touch file # necessary to commit in master and the create the branch
+#
+# file should actually be just a README.md for instance
+# Only one file is enough (no need for f1)
+#
 > git branch dev
 fatal: Not a valid object name: 'master'.
 > git add .
@@ -211,7 +225,8 @@ file1
 ```
 
 
-#### Create a new empty branch (Tricky not advisable)
+#### Create a new empty branch
+__NOTE:__ Tricky not advisable
 ```
 git checkout --orphan <branchname>
 ```
