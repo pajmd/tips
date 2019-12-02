@@ -8,7 +8,7 @@
 8. [][]
 
 #### create a new local repo
-In the folder where the project is located
+In the folder where the project is [located]
 ```
 gini init
 ```
