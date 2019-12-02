@@ -1,5 +1,5 @@
 1. [create a new local repo](#create-a-new-local-repo)
-1. [To push newly created repo](#push)  
+1. [To push newly created repo](#Push-newly-created-repo)  
 1. [MASTER vs HEAD](#MASTER-vs-HEAD)
 4. [][]
 5. [][]
@@ -13,7 +13,7 @@ In the folder where the project is [located]
 gini init
 ```
 
-#### To push newly created repo (github gives the intructions)
+#### Push newly created repo (github gives the intructions)
 * go to github to create the remote repo and obtain the repo url
 * add the remote repo url to git config
 ```
