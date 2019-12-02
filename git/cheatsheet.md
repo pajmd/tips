@@ -1,7 +1,7 @@
 1. [create a new local repo](#create-a-new-local-repo)
 1. [Push newly created repo](#Push-newly-created-repo)  
 1. [MASTER vs HEAD](#MASTER-vs-HEAD)
-4. [diff with a remote branch](#diff-with-a-remote-branch)
+4. [diff with a remote branch](#Diff-With-a-remote-branch)
 5. [][]
 6. [][]
 7. [][]
