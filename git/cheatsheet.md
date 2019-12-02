@@ -152,8 +152,53 @@ then push it to the remote
 ```
 git push
 ```
+### Starting a project with a master branch and child branches
+We could create a remote git repo and the clone it or local one.  
+Local:  
+```
+> git init
+> git status
+On branch master
+> git branch dev
+fatal: Not a valid object name: 'master'.
 
-#### Create a new empty branch
+> touch file # necessary to commit in master and the create the branch
+> git branch dev
+fatal: Not a valid object name: 'master'.
+> git add .
+> git commit -m "f1"
+> git branch dev
+> git diff master dev
+> echo "hi" >> f1
+> git diff master dev
+> git add .
+> git commit -m"hi"
+> git diff master dev
+diff --git a/f1 b/f1
+deleted file mode 100644
+> git ls-tree -r --name-only master
+f1
+file1
+> git ls-tree -r --name-only dev
+file1
+> git checkout dev
+Switched to branch 'dev'
+> git pull . master
+From .
+ * branch            master     -> FETCH_HEAD
+> git ls-tree -r --name-only dev
+f1
+file1
+> 
+> 
+> 
+> 
+
+```
+
+We end up with a master branch. 
+
+#### Create a new empty branch (Tricky not advisable)
 ```
 git checkout --orphan <branchname>
 ```
