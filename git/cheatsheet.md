@@ -1,7 +1,9 @@
+## TOC
+
 1. [create a new local repo](#create-a-new-local-repo)
 1. [Push newly created repo](#Push-newly-created-repo)  
 1. [MASTER vs HEAD](#MASTER-vs-HEAD)
-4. [diff with a remote](#Diff-With-a-remote)
+4. [diff with a remote branch](#Diff-With-a-remote-branch)
 5. [][]
 6. [][]
 7. [][]
@@ -13,7 +15,9 @@ In the folder where the project is [located]
 gini init
 ```
 
-#### Push newly created repo (github gives the intructions)
+#### Push newly created repo 
+*Note:* github gives the intructions
+
 * go to github to create the remote repo and obtain the repo url
 * add the remote repo url to git config
 ```
