@@ -8,7 +8,7 @@
 6. [Synchronize](#Synchronize)
 6. [diff](#diff)
 6. [Delete branches](#Delete-branches)
-6. [Create a new branch from the current branch](#Create-a-new-branch-from-the current-branch)
+6. [Create a new branch from the current branch](#Create-a-new-branch-from-the-current-branch)
 6. [Starting a project](#Starting-a-project)
 6. [Create a new empty branch](#Create-a-new-empty-branch)
 6. [](#)
@@ -166,7 +166,7 @@ git push -d origin master
 ```
 
 #### Create a new branch from the current branch 
-_AKA copy of the current branch_
+__AKA copy of the current branch__
 ```
 git checkout -b [name_of_your_new_branch]  
 ```
