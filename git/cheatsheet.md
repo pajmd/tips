@@ -1,5 +1,5 @@
 1. [create a new local repo](#create-a-new-local-repo)
-1. [To push newly created repo](#Push-newly-created-repo)  
+1. [Push newly created repo](#Push-newly-created-repo)  
 1. [MASTER vs HEAD](#MASTER-vs-HEAD)
 4. [][]
 5. [][]
