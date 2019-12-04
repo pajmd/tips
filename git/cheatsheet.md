@@ -29,8 +29,8 @@ Add files to it
 ```
 echo "# This is a readme" > README.md
 ```
-Stage the newly created file.
-___Note:__ In git terms stage and add are synonimous
+Stage the newly created file.  
+__Note:__ In git terms stage and add are synonimous
 ```
 git add README.md
 ```
