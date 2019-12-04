@@ -253,12 +253,12 @@ Master and initial are entirely different commit histories. Therefore pull reque
 ### Branches
 To show local branches:  
 ```
-ls ./.git/refs/heads/
+ls -al ./.git/refs/heads/
 git branch
 ```
 To show remote branches
 ```
-./.git/refs/remotes/
+ls -al ./.git/refs/remotes/
 git branch -r
 ```
 Branches can be fetch on a per branch basis or for the entire remote
