@@ -30,7 +30,7 @@ Add files to it
 echo "# This is a readme" > README.md
 ```
 Stage the newly created file.  
-__Note:__ In git terms stage and add are synonimous
+__Note:__ In git terms stage and add are synonymous
 ```
 git add README.md
 ```
