@@ -25,6 +25,19 @@ In the folder where the project is [located]
 ```
 gini init
 ```
+Add files to it
+```
+echo "# This is a readme" > README.md
+```
+Stage the newly created file.
+___Note:__ In git terms stage and add are synonimous
+```
+git add README.md
+```
+Commit the newly staged file.
+```
+git commit -m "Some comments"
+```
 
 #### Push newly created repo 
 **Note:** github gives the intructions after create the remote (origin) repo
