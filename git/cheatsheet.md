@@ -12,6 +12,9 @@
 6. [Starting a project](#Starting-a-project)
 6. [Create a new empty branch](#Create-a-new-empty-branch)
 6. [Branches](#Branches)
+6. [Tag vs Release](#Tag vs Release)
+6. [](#)
+6. [](#)
 6. [](#)
 6. [](#)
 6. [](#)
@@ -267,6 +270,16 @@ git fetch <remote>  # Fetch all of the branches from the repository
 git fetch <remote> <branch>  # only fetch the specified branch
 git fetch --all  # etches all registered remotes and their branches
 git fetch --dry-run  # a demo run of the command. 
+```
+
+### Tag vs Release
+Release is a github concept based on Tag but with more features linked to it
+On a local repo:  
+```
+git tag  -m "some comment abit the tag" <tag name ex: v0.0.0> <commitid>  # create a local tag. commitid is necessary if nothing was previouly tagged
+git push --tag  # push the tag to the remote origin
+git tag -l  # List all the tags
+git log  # show the commit history along with tags
 ```
 
 
