@@ -11,7 +11,7 @@
 6. [Create a new branch from the current branch](#Create-a-new-branch-from-the-current-branch)
 6. [Starting a project](#Starting-a-project)
 6. [Create a new empty branch](#Create-a-new-empty-branch)
-6. [](#)
+6. [Branches](#Branches)
 6. [](#)
 6. [](#)
 6. [](#)
@@ -249,6 +249,25 @@ git push -u origin master
 ```
 ##### Note:  
 Master and initial are entirely different commit histories. Therefore pull request wont be possible.
+
+### Branches
+To show local branches:  
+```
+ls ./.git/refs/heads/
+git branch
+```
+To show remote branches
+```
+./.git/refs/remotes/
+git branch -r
+```
+Branches can be fetch on a per branch basis or for the entire remote
+```
+git fetch <remote>  # Fetch all of the branches from the repository
+git fetch <remote> <branch>  # only fetch the specified branch
+git fetch --all  # etches all registered remotes and their branches
+git fetch --dry-run  # a demo run of the command. 
+```
 
 
 ### references
