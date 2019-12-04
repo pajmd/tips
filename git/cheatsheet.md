@@ -12,14 +12,16 @@
 6. [Starting a project](#Starting-a-project)
 6. [Create a new empty branch](#Create-a-new-empty-branch)
 6. [Branches](#Branches)
-6. [Tag vs Release](#Tag vs Release)
-6. [](#)
+6. [Tag vs Release](#Tag-vs-Release)
+6. [god knows](#stuff)
 6. [](#)
 6. [](#)
 6. [](#)
 6. [](#)
 6. [](#)
 
+### god knows
+xxxxxx
 #### create a new local repo
 In the folder where the project is [located]
 ```
