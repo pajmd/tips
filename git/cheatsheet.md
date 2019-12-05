@@ -13,7 +13,7 @@
 6. [Create a new empty branch](#Create-a-new-empty-branch)
 6. [Branches](#Branches)
 6. [Tag vs Release](#Tag-vs-Release)
-6. [](#)
+6. [GitHub Ssh Keys](#GitHub-Ssh-Keys)
 6. [](#)
 6. [](#)
 6. [](#)
@@ -294,6 +294,24 @@ git push --tag  # push the tag to the remote origin
 git tag -l  # List all the tags
 git log  # show the commit history along with tags
 ```
+
+### GitHub Ssh Keys
+One of the good things about using ssh keys with GitHub is that it integrates nicely with IDE like VScode.
+After installing ssh key in GitHub IDE like VSCode no longer request credentials while communicating with GitHub.
+Idem for git CLI.  
+
+To create a Ssh Key:
+```
+ssh-keygen  # specify in the key name what it is for ex: id_rsa_github
+            # passphrase just <enter>
+```
+Copy over the public key to GitHub
+```
+Upper right corner dropdown select settings
+choose SSH & GPG Keys
+Right panel select SSH Keys - New key
+```
+
 
 
 ### references
