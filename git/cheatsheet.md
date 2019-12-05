@@ -297,7 +297,7 @@ git log  # show the commit history along with tags
 
 ### GitHub Ssh Keys
 One of the good things about using ssh keys with GitHub is that it integrates nicely with IDE like VScode.
-After installing ssh key in GitHub IDE like VSCode no longer request credentials while communicating with GitHub.
+After installing ssh key in GitHub, IDEs like VSCode no longer request credentials while communicating with GitHub.  
 Idem for git CLI.  
 
 To create a Ssh Key:
