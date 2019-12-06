@@ -6,7 +6,7 @@ Various tips for
 - vuejs
 - sass ccs compiler
 - css css grid
-- vuex (kinda redex) nuxt (framework)
+- vuex (kinda redux) nuxt (framework)
 - book code clean
 
 ...
